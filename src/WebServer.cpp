@@ -21,14 +21,20 @@ void WebServer::handle_root() {
 void WebServer::handle_settings() {
     bool save = false;
 
+    // Parse passed parameters
     wifi.parse_config_params(this, save);
     dataCollector.parse_config_params(this, save);
     tempSensor.parse_config_params(this, save);
 
+    process_setting("humidity_low", settings.getSettings()->hm.targetHumidityLow, save);
+    process_setting("humidity_high", settings.getSettings()->hm.targetHumidityHigh, save);
+
+    // Save settings if necessary
     if (save) {
         settings.save();
     }
 
+    // Generate settings page content
     char network_settings[strlen_P(NETWORK_CONFIG_PAGE) + 32];
     wifi.get_config_page(network_settings);
 
@@ -44,7 +50,9 @@ void WebServer::handle_settings() {
         CONFIG_PAGE,
         network_settings,
         data_collector_settings,
-        temp_sensor_settings);
+        temp_sensor_settings,
+        settings.getSettings()->hm.targetHumidityLow,
+        settings.getSettings()->hm.targetHumidityHigh);
     server->send(200, "text/html", buffer);
 }
 

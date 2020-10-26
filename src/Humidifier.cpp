@@ -20,10 +20,16 @@ void Humidifier::loop() {
         logger.log("Stopping due to low water level.");
         stop();
         return;
+    } else {
+        logger.log("Water level OK.");
     }
 
-    //TODO - from BME280
-    int humidity = 30;
+    if (tempSensor.getPressure() < 100) {
+        logger.log("Temp sensor not ready, skipping humidifier setup.");
+        return;
+    }
+
+    float humidity = tempSensor.getHumidity();
 
     if (isRunning) {
         if (humidity >= settings.getSettings()->hm.targetHumidityHigh) {
