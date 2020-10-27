@@ -18,6 +18,7 @@ void DataCollector::collectData() {
         append("humidity", tempSensor.getHumidity(), 1);
         append("abs_humidity", tempSensor.getAbsoluteHimidity(), 2);
         append("pressure", tempSensor.getPressure(), 1);
+        append("humidifying", humidifier.isHumidifying()?1:0);
 
         if (lastPushedHumidity < 0) {
             lastPushedTemp = tempSensor.getTemperature();

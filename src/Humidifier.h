@@ -7,6 +7,7 @@ class Humidifier {
         Humidifier(uint8_t fanPin, uint8_t pwmPin, uint8_t waterOKPin);
         void begin();
         void loop();
+        bool isHumidifying();
     private:
         void start();
         void stop(boolean force=false);

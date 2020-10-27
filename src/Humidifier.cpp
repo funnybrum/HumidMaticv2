@@ -71,3 +71,7 @@ void Humidifier::stop(boolean force) {
 boolean Humidifier::waterOK() {
     return digitalRead(_waterOKPin) == LOW;
 }
+
+boolean Humidifier::isHumidifying() {
+    return isRunning;
+}

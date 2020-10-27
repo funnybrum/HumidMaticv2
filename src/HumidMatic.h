@@ -19,6 +19,7 @@ extern WiFiManager wifi;
 
 extern BoschBME280 tempSensor;
 extern DataCollector dataCollector;
+extern Humidifier humidifier;
 
 #define HTTP_PORT 80
-#define HOSTNAME "aq-monitor"
+#define HOSTNAME "hm-default"
