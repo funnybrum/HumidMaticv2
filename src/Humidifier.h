@@ -8,10 +8,10 @@ class Humidifier {
         void begin();
         void loop();
         bool isHumidifying();
+        bool waterOK();
     private:
         void start();
         void stop(boolean force=false);
-        boolean waterOK();
         void cleanUp();
         
         uint8_t _fanPin;

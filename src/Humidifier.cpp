@@ -20,8 +20,6 @@ void Humidifier::loop() {
         logger.log("Stopping due to low water level.");
         stop();
         return;
-    } else {
-        logger.log("Water level OK.");
     }
 
     if (tempSensor.getPressure() < 100) {
@@ -62,16 +60,16 @@ void Humidifier::stop(boolean force) {
         return;
     }
 
-    digitalWrite(_fanPin, LOW);
+    digitalWrite(_fanPin, HIGH);
     digitalWrite(_pwmPin, HIGH);
 
     isRunning = false;
 }
 
-boolean Humidifier::waterOK() {
+bool Humidifier::waterOK() {
     return digitalRead(_waterOKPin) == LOW;
 }
 
-boolean Humidifier::isHumidifying() {
+bool Humidifier::isHumidifying() {
     return isRunning;
 }

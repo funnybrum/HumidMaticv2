@@ -64,7 +64,9 @@ void WebServer::handle_get() {
               tempSensor.getHumidity(),
               tempSensor.getRawHumidity(),
               tempSensor.getAbsoluteHimidity(),
-              tempSensor.getPressure());
+              tempSensor.getPressure(),
+              humidifier.isHumidifying(),
+              humidifier.waterOK());
     server->send(200, "application/json", buffer);
 }
 
